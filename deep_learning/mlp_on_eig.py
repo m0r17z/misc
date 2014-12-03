@@ -10,11 +10,9 @@ import climin.initialize
 from breze.learn.mlp import Mlp
 
 f = h5.File('eigdata.hdf5', 'r')
-X = f['matrices']
-Z = f['eigvals']
+X = f['matrices'][...]
+Z = f['eigvals'][...]
 
-VX = X
-VZ = Z
 
 max_passes = 100
 batch_size = 2000
@@ -42,13 +40,13 @@ m.exprs['loss'] = m.exprs['loss'] + c_wd * weight_decay
 
 start = time.time()
 # Set up a nice printout.
-keys = '#', 'seconds', 'loss', 'val loss'
+keys = '#', 'seconds', 'loss', 'val_loss'
 max_len = max(len(i) for i in keys)
 header = '\t'.join(i for i in keys)
 print header
 print '-' * len(header)
 
-for i, info in enumerate(m.powerfit((X, Z), (VX, VZ), stop, pause)):
+for i, info in enumerate(m.powerfit((X, Z), (X, Z), stop, pause)):
     if info['n_iter'] % n_report != 0:
         continue
     passed = time.time() - start
