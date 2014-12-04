@@ -35,7 +35,7 @@ def draw_pars(n=1):
 
 def run_mlp(n_job, pars):
 
-    f = h5.File('eigdata.hdf5', 'r')
+    f = h5.File('~/datasets/eigdata.hdf5', 'r')
     X = f['matrices'][...]
     Z = f['eigvals'][...]
 
