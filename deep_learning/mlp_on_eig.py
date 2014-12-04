@@ -24,7 +24,7 @@ pause = climin.stops.ModuloNIterations(n_report)
 
 optimizer = 'gd', {'steprate': 0.1}
 
-m = Mlp(10000, [500], 1, hidden_transfers=['sigmoid'], out_transfer='identity', loss='squared',
+m = Mlp(20000, [500], 1, hidden_transfers=['sigmoid'], out_transfer='identity', loss='squared',
         optimizer=optimizer, batch_size=batch_size)
 climin.initialize.randomize_normal(m.parameters.data, 0, 1e-1)
 
@@ -54,5 +54,5 @@ for i, info in enumerate(m.powerfit((X, Z), (X, Z), stop, pause)):
 
     info.update({
         'time': passed})
-    row = '%(n_iter)i\t%(time)g\t%(loss)g\t%(val_loss)g\t%(train_emp)g\t%(val_emp)g' % info
+    row = '%(n_iter)i\t%(time)g\t%(loss)g\t%(val_loss)g' % info
     print row
