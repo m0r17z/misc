@@ -24,7 +24,7 @@ def draw_pars(n=1):
             sample.update({'step_rate_max': 0.05, 'step_rate_min': 1e-5})
             return 'rmsprop', sample
     grid = {
-    'n_hidden': [500, 500],
+    'n_hidden': [[500, 500]],
     'hidden_transfer': ['sigmoid', 'tanh', 'rectifier'],
     'par_std': [1.5, 1, 1e-1, 1e-2],
     'optimizer': OptimizerDistribution(),
@@ -35,7 +35,7 @@ def draw_pars(n=1):
 
 def run_mlp(n_job, pars):
 
-    f = h5.File('$HOME/datasets/eigdata.hdf5', 'r')
+    f = h5.File('../../../datasets/eigdata.hdf5', 'r')
     X = f['matrices'][...]
     Z = f['eigvals'][...]
 
