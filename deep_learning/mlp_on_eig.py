@@ -51,7 +51,7 @@ def run_mlp(n_job, pars):
 
     m = Mlp(20000, pars['n_hidden'], 1, hidden_transfers=[pars['hidden_transfer']]*len(pars['n_hidden']), out_transfer='identity', loss='squared',
             optimizer=pars['optimizer'], batch_size=batch_size)
-    climin.initialize.randomize_normal(m.parameters.data, 0, 1e-1)
+    climin.initialize.randomize_normal(m.parameters.data, 0, pars['par_std'])
 
     losses = []
     f.write('max iter: %d \n' %max_iter)
